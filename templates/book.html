@@ -9,9 +9,9 @@
     {% for i in book_object %}
         <h1>{{i.title}}</h1>
     <img src="{{i.image.url}}" alt="" width="200" height="200">
-    <p>{{i.description}}</p>
-    <p>{{i.created_date}}</p>
-    <p>{{i.updated_date}}</p>
+
+        <h3><button><a href="/book_detail/{{i.id}}/">ПОДРОБНЕЕ</a></button></h3>
+        <p></p>
     {% endfor %}
 </center>
 
