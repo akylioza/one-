@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #606060;
+    font-size: 14px;
+}
+.container {
+    max-width: 960px;
+    margin: 50px auto;
+    padding: 0 15px;
+    background: white;
+}
+.post-image img {
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+.post h1 {
+    color: #222;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.post-meta {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+time,
+.author {
+    padding-right: 26px;
+    position: relative;
+}
+time:after,
+.author:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #666;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+p {
+    line-height: 1.5;
+    margin-bottom: 1em;
+}
+@media (min-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    .container {
+        padding: 0 45px;
+    }
+    .post-image img {
+        float: right;
+        width: 300px;
+        margin: 0 0 20px 20px;
+    }
+    .post-header {
+        padding-left: 26px;
+        border-left: 4px solid #D8D8D8;
+        margin-left: -30px;
+    }
+}
+
+body {
+  background: url(https://html5book.ru/wp-content/uploads/2015/07/background39.png);
+}
+.floating-button {
+  text-decoration: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+  transition: .3s;
+}
+.floating-button:hover {
+  background: #2EE59D;
+  box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+  color: white;
+  transform: translateY(-7px);
+}
