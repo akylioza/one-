@@ -1,44 +1,68 @@
 from django.shortcuts import render, get_object_or_404
 from . import models, forms
 from django.http import HttpResponse
+from django.views import generic
 
-def bookview(request):
-    book = models.Book.objects.all()
-    return render(request, 'book.html', {'book_object': book})
+class BookView(generic.ListView):
+    template_name = 'book.html'
+    queryset = models.Book.objects.all()
+
+
+
+class BookDetailView(generic.DetailView):
+    template_name = 'book_detail.html'
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.Book, id=book_id)
+
+
+
+
+
+class BookCreateView(generic.CreateView):
+    template_name = 'create_book.html'
+    form_class = forms.ShowForm
+    queryset = models.Book.objects.all()
+    success_url = 'http://127.0.0.1:8000/'
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(BookCreateView, self).form_valid(form=form)
+
+
+
+
+class BookUpdateView(generic.UpdateView):
+    template_name = 'book_update.html'
+    form_class = forms.ShowForm
+    success_url = 'http://127.0.0.1:8000/'
+
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.Book, id=book_id)
+
+    def form_valid(self, form):
+        return super(BookUpdateView, self).form_valid(form=form)
+
+
+
+class BookDeleteView(generic.DeleteView):
+    template_name = 'confirm_deletion.html'
+    success_url = 'http://127.0.0.1:8000/'
+    def get_object(self, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.Book, id=book_id)
+
 
 def rating_view(request):
     rating = models.Rating.objects.all()
-    return render(request, 'book_detail.html', {'rating_object': rating})
+    return render(request, 'book_detail.html', {'book_rate': rating})
 
 
-def book_view_detail(request, id):
-    book_detail = get_object_or_404(models.Book, id=id)
-    return render(request, 'book_detail.html', {'object_detail': book_detail})
+def comment_view(request):
+    comment = models.BookComment.objects.all()
+    return render(request, 'book_detail.html', {'book_comm': comment})
 
-def add_book_view(request):
-    method = request.method
-    if method == 'POST':
-        form = forms.ShowForm(request.POST, request.FILES)
-        form.save()
-        return HttpResponse('<h1>книга успешно добавлена</h1>')
-
-    else:
-        form = forms.ShowForm()
-
-    return render(request, 'create_book.html', {'form': form})
-
-def update_book_view(request, id):
-    show_object = get_object_or_404(models.Book, id=id)
-    if request.method == 'POST':
-        form = forms.ShowForm(instance=show_object, data=request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('<h1>книга успешно обновлена</h1>')
-    else:
-        form = forms.ShowForm(instance=show_object)
-    return render(request, 'book_update.html', {'form': form, 'object': show_object})
-
-def delete_book_view(request, id):
-    show_object = get_object_or_404(models.Book, id=id)
-    show_object.delete()
-    return HttpResponse('<h1>Книга успешно удалена</h1>')
+def expert_recomendation_view(request):
+    exp_rec = models.ExpertRecomendation.objects.all()
+    return render(request, 'book_detail.html', {'book_recomendation': exp_rec})

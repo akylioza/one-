@@ -9,12 +9,12 @@
 <body>
      <a href="/add_book/" class="floating-button">Add New Book</a>
 
-    {% for i in book_object %}
+    {% for i in object_list %}
         <div class="product-item">
     <img src="{{i.image.url}}" alt="" width="200" height="200">
     <div class="product-list">
       <h3>{{i.title}}</h3>
-        <a href="/book_detail/{{i.id}}/" class="button">Подробнее</a>
+        <a href="/book_detail/{{i.id}}/" class="floating-button">Подробнее</a>
     </div>
   </div>
 
