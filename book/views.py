@@ -17,8 +17,6 @@ class BookDetailView(generic.DetailView):
 
 
 
-
-
 class BookCreateView(generic.CreateView):
     template_name = 'create_book.html'
     form_class = forms.ShowForm
