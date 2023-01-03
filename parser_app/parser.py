@@ -18,27 +18,27 @@ def get_html(url, params=''):
 def get_data(html):
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='th-item')
-    manas_flm = []
+    serial_flm = []
 
     for item in items:
-        manas_flm.append(
+        serial_flm.append(
             {
                 'title': item.find("a").get('href'),
                 'title_text': item.find('a', class_='th-in fx-col th-hover').get_text(),
                 'image': URL + item.find('a', class_='th-in fx-col th-hover').find('img').get('src')
             }
         )
-    return manas_flm
+    return serial_flm
 
 
 @csrf_exempt
 def parser():
     html = get_html(URL)
     if html.status_code == 200:
-        manas_flm1 = []
+        serial_flm1 = []
         for page in range(0, 1):
             html = get_html(f'http://skyserial.video/serial/', params=page)
-            manas_flm1.extend(get_data(html.text))
-        return manas_flm1
+            serial_flm1.extend(get_data(html.text))
+        return serial_flm1
     else:
         raise Exception('Error in parser func.....')
