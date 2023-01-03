@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class FilmParser(models.Model):
     title = models.CharField(max_length=100)
     title_text = models.CharField(max_length=100)

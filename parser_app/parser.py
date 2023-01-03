@@ -23,7 +23,7 @@ def get_data(html):
     for item in items:
         manas_flm.append(
             {
-                'title': URL + item.find("a").get('href'),
+                'title': item.find("a").get('href'),
                 'title_text': item.find('a', class_='th-in fx-col th-hover').get_text(),
                 'image': URL + item.find('a', class_='th-in fx-col th-hover').find('img').get('src')
             }
